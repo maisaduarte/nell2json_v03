@@ -82,7 +82,7 @@ public class ManipulationExecution {
 
                          {
                             try {
-                                Utility.writeJsonFile(jsonCPL.getJsonObject(), Main.fileOutToString + "teste", true);
+                                Utility.writeJsonFile(jsonCPL.getJsonObjectMain(), Main.fileOutToString + "teste", true);
                             } catch (IOException ex) {
                                 System.out.println("Erro para escrever um anta duma linha" + ex);
                             }
@@ -195,7 +195,7 @@ public class ManipulationExecution {
                         
                         JSON_CPL jsonCPL = new JSON_CPL(pair.getValue());
                         jsonCPL.setJsonObject();
-                        jsonArrayIntern.add(jsonCPL.getJsonObject());
+                        jsonArrayIntern.add(jsonCPL.getJsonObjectMain());
                         break;
                     default:
                     // throw new IllegalArgumentException("Invalid Component Name: " + key);

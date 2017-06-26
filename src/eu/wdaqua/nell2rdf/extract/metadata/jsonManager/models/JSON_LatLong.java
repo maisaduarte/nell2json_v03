@@ -5,20 +5,25 @@
  */
 package eu.wdaqua.nell2rdf.extract.metadata.jsonManager.models;
 
-import eu.wdaqua.nell2rdf.extract.metadata.models.AliasMatcher;
+import eu.wdaqua.nell2rdf.extract.metadata.models.LatLong;
 
 /**
  *
  * @author Maisa
  */
-public class JSON_AliasMatcher extends JSON_Header {
+public class JSON_LatLong extends JSON_Header {
 
-    private final AliasMatcher aliasmatcher;
+    private final LatLong latlong;
 
-    public JSON_AliasMatcher(Object o) {
+    public JSON_LatLong(Object o) {
         super(o);
-        super.setJsonObject();
-        this.aliasmatcher = (AliasMatcher) o;
-        jsonObjectMain.put(TYPE_METADATA, this.aliasmatcher.getFreebaseDate());
+        this.latlong = (LatLong) o;
     }
+
+    @Override
+    public void setJsonObject() {
+        super.setJsonObject();
+        this.jsonObjectMain.put(TYPE_METADATA, latlong.getRules());
+    }
+
 }

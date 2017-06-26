@@ -5,8 +5,10 @@
  */
 package eu.wdaqua.nell2rdf.extract.metadata.jsonManager.models;
 
-import eu.wdaqua.nell2rdf.extract.metadata.models.CPL;
+import static eu.wdaqua.nell2rdf.extract.metadata.jsonManager.models.JSON_Header.TYPE_METADATA;
+import eu.wdaqua.nell2rdf.extract.metadata.models.OE;
 import eu.wdaqua.nell2rdf.extract.metadata.util.ConstantList;
+import java.net.URL;
 import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,30 +17,26 @@ import org.json.simple.JSONObject;
  *
  * @author Maisa
  */
-public class JSON_CPL extends JSON_Header {
+public class JSON_OE extends JSON_Header {
 
-    private final CPL cpl;
+    private final OE oe;
 
-    public JSON_CPL(Object o) {
+    public JSON_OE(Object o) {
         super(o);
-        this.cpl = (CPL) o;
+        oe = (OE) o;
     }
 
     @Override
     public void setJsonObject() {
         super.setJsonObject();
-
         JSONArray jsonArray = new JSONArray();
-
-        this.jsonObjectMain.put(ConstantList.FROM, this.cpl.getFrom());
-        for (Map.Entry<String, Integer> pair : this.cpl.getMapTPOccurence().entrySet()) {
+        for (Map.Entry<String, URL> pair : this.oe.getMapTextURL().entrySet()) {
             JSONObject jsonObjectTemp = new JSONObject();
-            jsonObjectTemp.put(ConstantList.TEXTUAL_PATTERN_ACRONYM, pair.getKey());
-            jsonObjectTemp.put(ConstantList.OCCURRENCE, pair.getValue());
+            jsonObjectTemp.put(ConstantList.TEXT, pair.getKey());
+            jsonObjectTemp.put(ConstantList.URL, pair.getValue());
             jsonArray.add(jsonObjectTemp);
         }
         this.jsonObjectMain.put(TYPE_METADATA, jsonArray);
-
     }
 
 }

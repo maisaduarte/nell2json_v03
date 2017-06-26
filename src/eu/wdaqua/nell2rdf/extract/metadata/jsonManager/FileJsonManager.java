@@ -5,11 +5,7 @@ package eu.wdaqua.nell2rdf.extract.metadata.jsonManager;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import org.json.simple.JSONObject;
-
-
 
 /**
  *

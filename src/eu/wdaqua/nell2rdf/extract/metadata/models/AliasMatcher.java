@@ -15,6 +15,8 @@ import java.util.Date;
  * @author Maisa
  */
 public class AliasMatcher extends Header {
+    
+    
 
      //[Freebase 7/9/2012]
     private Date FreebaseDate;

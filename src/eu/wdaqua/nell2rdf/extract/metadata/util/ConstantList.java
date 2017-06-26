@@ -61,6 +61,7 @@ public abstract class ConstantList {
     public final static String EXTRACTION = "extraction";
     public final static String COMPONENT_NAME = "componentName";
 
+    //For the first Columns - less the last one
     public final static String ENTITY_CSV = "Entity";
     public final static String RELATION_CSV = "Relation";
     public final static String VALUE_CSV = "Value";
@@ -74,5 +75,12 @@ public abstract class ConstantList {
     public final static String CATEGORIES_ENTITY_CSV = "Categories for Entity";
     public final static String CATEGORIES_VALUE_CSV = "Categories for Value";
     public final static String CANDIDATE_SOURCE_CSV = "Candidate Source";
+    
+    //For KBMANIPULATION
+    public final static String KBMANIPULATION_BUG = "bug";
+    
+    //For OE
+    public final static String TEXT = "text";
+    public final static String URL = "URL";
 
 }

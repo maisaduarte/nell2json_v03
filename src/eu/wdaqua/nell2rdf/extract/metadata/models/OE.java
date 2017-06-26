@@ -5,7 +5,6 @@
  */
 package eu.wdaqua.nell2rdf.extract.metadata.models;
 
-
 import static eu.wdaqua.nell2rdf.extract.metadata.util.ConstantList.OE;
 import eu.wdaqua.nell2rdf.extract.metadata.util.Utility;
 import java.net.MalformedURLException;
@@ -20,7 +19,7 @@ import java.util.regex.Pattern;
  */
 public class OE extends Header {
 
-  private Map<String, URL> mapTextURL;
+    private Map<String, URL> mapTextURL;
 
     public OE(String str, double Probability) {
         super(str, OE, Probability);

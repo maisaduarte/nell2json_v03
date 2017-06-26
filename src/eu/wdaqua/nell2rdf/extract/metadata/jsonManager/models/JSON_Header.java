@@ -15,24 +15,26 @@ import org.json.simple.JSONObject;
  */
 public class JSON_Header {
 
-    protected final JSONObject jsonObject;
+    protected final JSONObject jsonObjectMain;
+
+    public static String TYPE_METADATA = "metadata";
 
     private final Header header;
 
     // private final String SOURCE = "source";
     public JSON_Header(Object o) {
         header = (Header) o;
-        jsonObject = new JSONObject();
+        jsonObjectMain = new JSONObject();
     }
 
-    public JSONObject getJsonObject() {
-        return jsonObject;
+    public JSONObject getJsonObjectMain() {
+        return jsonObjectMain;
     }
 
     public void setJsonObject() {
-        this.jsonObject.put(ConstantList.COMPONENT_NAME, this.header.getComponentName());
-        this.jsonObject.put(ConstantList.ITERATION, this.header.getIteration());
-        this.jsonObject.put(ConstantList.DATETIME, this.header.getDateTime());
+        this.jsonObjectMain.put(ConstantList.COMPONENT_NAME, this.header.getComponentName());
+        this.jsonObjectMain.put(ConstantList.ITERATION, this.header.getIteration());
+        this.jsonObjectMain.put(ConstantList.DATETIME, this.header.getDateTime());
 
         JSONObject jsonObjectTemp = new JSONObject();
         if (this.header.getFormatHeader().getTypeKB().equalsIgnoreCase(ConstantList.CATEGORY)) {
@@ -42,6 +44,6 @@ public class JSON_Header {
             jsonObjectTemp.put(ConstantList.NAMED_ENTITY_ACRONYM1, this.header.getFormatHeader().getTokenElement1());
             jsonObjectTemp.put(ConstantList.NAMED_ENTITY_ACRONYM2, this.header.getFormatHeader().getTokenElement2());
         }
-        this.jsonObject.put(ConstantList.TOKEN, jsonObjectTemp);
+        this.jsonObjectMain.put(ConstantList.TOKEN, jsonObjectTemp);
     }
 }

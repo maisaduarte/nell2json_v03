@@ -51,8 +51,8 @@ public class LatLong extends Header {
         temp.append("[").append("[ComponentName: ").append(this.componentName).append(" {");
         temp.append(mapToken.get("token")[0]).append(",")
                 .append(mapToken.get("token")[1]).append(",")
-                .append(mapToken.get("token")[2]).append("}").
-                append(mapToken.get("token")[2]).append("} [").append(rules).append("]");;
+                .append(mapToken.get("token")[2]).append("}")
+                .append("} [").append(rules).append("]");
         return super.toString() + temp.toString();
     }
 
