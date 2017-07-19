@@ -25,7 +25,7 @@ public class OE extends Header {
         super(str, OE, Probability);
     }
 
-    public Map<String, URL> getMapTextURL() {
+    public Map<String, URL> getMetadata_mapTextURL() {
         return mapTextURL;
     }
 

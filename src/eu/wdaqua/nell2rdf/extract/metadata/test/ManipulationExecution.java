@@ -61,7 +61,7 @@ public class ManipulationExecution {
 
         StringBuffer temp = new StringBuffer();
 
-        while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
             setFeatures(line);
             Map<String, Object> p = LI.getListComponents();
 
@@ -72,6 +72,7 @@ public class ManipulationExecution {
                 switch (key) {
                     case ConstantList.ONTOLOGYMODIFIER:
                         temp.append(((OntologyModifier) pair.getValue()));
+                        //((CMC) pair.getValue()).g
                         //FormatHeader FH = ((OntologyModifier) pair.getValue()).getFormatHeader().
 
                         break;

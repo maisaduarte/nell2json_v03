@@ -21,7 +21,7 @@ public class Semparse extends Header {
 
      private List<String> listSentence;
 
-    public List<String> getListSentence() {
+    public List<String> getMetadata_SentenceList() {
         return listSentence;
     }
 

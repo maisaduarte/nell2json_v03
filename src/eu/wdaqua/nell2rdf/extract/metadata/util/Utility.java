@@ -44,6 +44,7 @@ public class Utility {
     private static final String REGEX_LATLONG_VALUES = "(?<=(>-))(.*)";
     private static final String REGEX_LATLONGTT_GEONAMES = "((?<=(>-)|(-geonames:))(.*))";
     private static final String REGEX_LATLONG_ALL_ATRIBUTES = "([A-Za-z ])*(\\@)([0-9-\\.,])*";
+    public static final String REGEX_LATLONG_RULES = "(([ A-Za-z])*(\\@)([\\-\\.0-9])*(,)([\\-\\.0-9])*)";
     private static final String REGEX_ONTOLOGYMODIFIER = "(?<=((\\d{2}\\:\\d{2}\\:\\d{2}))[-<])";
     private static final String REGEX_ITERATION_COMPONENT = "(?<=(Iter:))([0-9])*(?=-)";
 
@@ -57,7 +58,7 @@ public class Utility {
     private static final String REGEX_SPREAD_SHEET_ACTION = "(?<=(Action=\\())([a-zA-Z-0-9\\+\\-])*(?=(\\)))";
     private static final String REGEX_SPREAD_SHEET_FROM = "(?<=(\\(from))(.*)(?=(\\)))";
 
-    private static final String REGEX_RULE_INFERENCE = "(?<=(\\{))(.*)(?=(\\}))";
+    private static final String REGEX_RULE_INFERENCE_COMPLETE = "(?<=(\\{))(.*)(?=(\\}))";
     private static final String REGEX_PRA = "(?<=(>-))(.)*";
     private static final String REGEX_SEMPARSE = "(?<=(>-))(.)*";
     private static final String REGEX_ALIAS_MATCHER = "(?<=(\\[))(.)*(?=(\\]))";
@@ -71,6 +72,12 @@ public class Utility {
     public static final String REGEX_CMC_SOURCE_STRING = "(([A-Z=]+)([a-z])+)";
     public static final String REGEX_MBL = "(?<=(-<token=>-))(.)*";
     private static final String REGEX_HEADER_ALL_COMPONENTS = "(?<=(:))(.)([ 0-9-\\/:])+";
+
+    private static final String REGEX_RULES_1 = "(\\{\\{\\{prolog, \\{\\{\\{)((\\{([a-z_\\? \\}\\{,])*)(\\} \\}))";
+    public static final String REGEX_RULES_2 = "(?<=\\{)([a-z_\\?, ])*(?=\\})";
+    public static final String REGEX_RULES_3 = "(?<=, )([0-9.\\-\\?, ])*(?=\\})";
+    public static final String REGEX_RULES_4 = "(?<=[0-9](} , \\{))([A-Za-z_ ,\\?])*";
+    private static final String REGEX_RULES_5 = "(([a-zA-Z_\\?, \\]\\}])*)$";
 
     //static final String REGEX_OE_WEBSITE_SOURCE = "([a-zA-Z]{3,}):\\/\\/([\\w-]+\\.)+[\\w-]+(\\/[\\w- .\\/?%&\+=]*)?";
     private static String extract(String str, String regex) {
@@ -213,6 +220,22 @@ public class Utility {
         return extract(str, REGEX_HEADER_ALL_COMPONENTS);
     }
 
+    public static String getRuleInference_RULES_5(String str) {
+        return extract(str, REGEX_RULES_5).replace("}", "").replace("]", "");
+    }
+
+    public static String getRuleInference_RULES_4(String str) {
+        return extract(str, REGEX_RULES_4);
+    }
+
+    public static String getRuleInference_RULES_1(String str) {
+        return extract(str, REGEX_RULES_1);
+    }
+
+    public static String getRuleInference_RULES_2(String str) {
+        return extract(str, REGEX_RULES_2);
+    }
+
     public static String getIterationComponent(String str) {
         return extract(str, REGEX_ITERATION_COMPONENT);
     }
@@ -254,7 +277,7 @@ public class Utility {
     }
 
     public static String getRuleInference(String str) {
-        return extract(str, REGEX_RULE_INFERENCE);
+        return extract(str, REGEX_RULE_INFERENCE_COMPLETE);
     }
 
     public static String getMBLCandidateSource(String str) {

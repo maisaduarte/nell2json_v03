@@ -23,7 +23,7 @@ public class JSON_KbManipulation extends JSON_Header {
     @Override
     public void setJsonObject() {
         super.setJsonObject();
-        jsonObjectMain.put(TYPE_METADATA, kbmanipulation.getOldBug());
+        jsonObjectMain.put(TYPE_METADATA, kbmanipulation.getMetadata());
     }
 
 }

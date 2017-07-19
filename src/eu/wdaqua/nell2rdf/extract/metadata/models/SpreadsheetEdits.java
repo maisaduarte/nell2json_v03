@@ -14,7 +14,7 @@ import eu.wdaqua.nell2rdf.extract.metadata.util.Utility;
  */
 public class SpreadsheetEdits extends Header {
 
- private String userFeedback;
+    private String userFeedback;
     private String entity;
     private String relation;
     private String value;
@@ -23,6 +23,30 @@ public class SpreadsheetEdits extends Header {
 
     public SpreadsheetEdits(String str, double Probability) {
         super(str, SPREADSHEETEDITS, Probability);
+    }
+
+    public String getMetadata_UserFeedback() {
+        return userFeedback;
+    }
+
+    public String getMetadata_Entity() {
+        return entity;
+    }
+
+    public String getMetadata_Relation() {
+        return relation;
+    }
+
+    public String getMetadata_Value() {
+        return value;
+    }
+
+    public String getMetadata_Action() {
+        return action;
+    }
+
+    public String getMetadata_From() {
+        return from;
     }
 
     @Override

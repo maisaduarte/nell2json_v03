@@ -21,7 +21,7 @@ public class KbManipulation extends Header {
         super(str, KBMANIPULATION, Probability);
     }
 
-    public String getOldBug() {
+    public String getMetadata_oldBug() {
         return oldBug;
     }
 

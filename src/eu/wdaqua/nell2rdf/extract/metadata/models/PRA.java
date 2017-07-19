@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class PRA extends Header {
 
-     private Map<String, Double> mapTriple;
+    private Map<String, Double> mapTriple;
 
     public PRA(String str, double Probability) {
         super(str, PRA, Probability);
@@ -60,6 +60,21 @@ public class PRA extends Header {
         });
         temp.append("}");
         return temp.toString();
+    }
+
+    private class Rule {
+
+        String sNamedEntity;
+        String sRelation;
+        Double dValue;
+        String sReferency;
+
+        public Rule(String sNamedEntity, String sRelation, Double dValue, String sReferency) {
+            this.sNamedEntity = sNamedEntity;
+            this.sRelation = sRelation;
+            this.dValue = dValue;
+            this.sReferency = sReferency;
+        }
     }
 
 }

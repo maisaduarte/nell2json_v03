@@ -8,15 +8,13 @@ package eu.wdaqua.nell2rdf.extract.metadata.models;
 import static eu.wdaqua.nell2rdf.extract.metadata.util.ConstantList.MBL;
 import eu.wdaqua.nell2rdf.extract.metadata.util.Utility;
 
-
-
 /**
  *
  * @author Maisa
  */
 public class MBL extends Header {
 
-  private String promotionOfConcept;
+    private String promotionOfConcept;
 
     public String getPromotionOfConcept() {
         return promotionOfConcept;
@@ -41,4 +39,7 @@ public class MBL extends Header {
         return getPromotionOfConcept();
     }
 
+    public String getMetadata_PromotionOfConcept() {
+        return this.promotionOfConcept;
+    }
 }

@@ -29,7 +29,7 @@ public class CPL extends Header {
         return from;
     }
 
-    public Map<String, Integer> getMapTPOccurence() {
+    public Map<String, Integer> getMetadata_MapTPOccurence() {
         return mapMD;
     }
 

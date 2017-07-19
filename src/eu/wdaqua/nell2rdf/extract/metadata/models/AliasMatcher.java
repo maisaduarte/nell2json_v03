@@ -30,13 +30,13 @@ public class AliasMatcher extends Header {
         this.FreebaseDate = Utility.setDateTimeFormatFreebase(Utility.getAliasMatcherFreebase(str));
     }
 
-    public Date getFreebaseDate() {
+    public Date getMetadata_FreebaseDate() {
         return FreebaseDate;
     }
 
     @Override
     public String toString() {
-        return super.toString() + " " + getFreebaseDate() + "]";
+        return super.toString() + " " + getMetadata_FreebaseDate() + "]";
     }
 
     @Override

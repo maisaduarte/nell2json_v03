@@ -30,7 +30,7 @@ public class JSON_CMC extends JSON_Header {
         JSONObject jObjTemp2;
         JSONArray jArrayTemp1 = new JSONArray();
 
-        for (int i = 0; i < cmc.getCmcList().size(); i++) {
+        for (int i = 0; i < cmc.getMetadata().size(); i++) {
             jObjTemp1 = new JSONObject();
             jObjTemp2 = new JSONObject();
             jObjTemp1.put(cmc.getCMCObjetcField1(i), cmc.getCMCObjetcField2(i));
