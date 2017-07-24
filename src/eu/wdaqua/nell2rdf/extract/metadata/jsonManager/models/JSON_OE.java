@@ -30,7 +30,7 @@ public class JSON_OE extends JSON_Header {
     public void setJsonObject() {
         super.setJsonObject();
         JSONArray jsonArray = new JSONArray();
-        for (Map.Entry<String, URL> pair : this.oe.getMapTextURL().entrySet()) {
+        for (Map.Entry<String, URL> pair : this.oe.getMetadata_mapTextURL().entrySet()) {
             JSONObject jsonObjectTemp = new JSONObject();
             jsonObjectTemp.put(ConstantList.TEXT, pair.getKey());
             jsonObjectTemp.put(ConstantList.URL, pair.getValue());

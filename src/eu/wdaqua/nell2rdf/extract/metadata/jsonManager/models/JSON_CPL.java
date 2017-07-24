@@ -31,7 +31,7 @@ public class JSON_CPL extends JSON_Header {
         JSONArray jsonArray = new JSONArray();
 
         this.jsonObjectMain.put(ConstantList.FROM, this.cpl.getFrom());
-        for (Map.Entry<String, Integer> pair : this.cpl.getMetadata().entrySet()) {
+        for (Map.Entry<String, Integer> pair : this.cpl.getMetadata_MapTPOccurence().entrySet()) {
             JSONObject jsonObjectTemp = new JSONObject();
             jsonObjectTemp.put(ConstantList.TEXTUAL_PATTERN_ACRONYM, pair.getKey());
             jsonObjectTemp.put(ConstantList.OCCURRENCE, pair.getValue());

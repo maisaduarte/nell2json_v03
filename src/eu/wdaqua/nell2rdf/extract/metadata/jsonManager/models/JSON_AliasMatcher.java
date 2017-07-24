@@ -19,6 +19,6 @@ public class JSON_AliasMatcher extends JSON_Header {
         super(o);
         super.setJsonObject();
         this.aliasmatcher = (AliasMatcher) o;
-        jsonObjectMain.put(TYPE_METADATA, this.aliasmatcher.getFreebaseDate());
+        jsonObjectMain.put(TYPE_METADATA, this.aliasmatcher.getMetadata_FreebaseDate());
     }
 }

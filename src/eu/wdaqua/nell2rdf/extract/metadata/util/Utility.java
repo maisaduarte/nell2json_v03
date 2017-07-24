@@ -60,6 +60,8 @@ public class Utility {
 
     private static final String REGEX_RULE_INFERENCE_COMPLETE = "(?<=(\\{))(.*)(?=(\\}))";
     private static final String REGEX_PRA = "(?<=(>-))(.)*";
+    public static final String REGEX_PRA_RULE = "([a-zA-Z~,0:_\\-])*\\t([0-9\\.])*";
+    
     private static final String REGEX_SEMPARSE = "(?<=(>-))(.)*";
     private static final String REGEX_ALIAS_MATCHER = "(?<=(\\[))(.)*(?=(\\]))";
     private static final String REGEX_ALIAS_MATCHER_FREEBASE = "(?<=(>-))(.)*";

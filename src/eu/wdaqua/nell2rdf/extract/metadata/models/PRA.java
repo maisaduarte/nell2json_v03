@@ -7,31 +7,48 @@ package eu.wdaqua.nell2rdf.extract.metadata.models;
 
 import static eu.wdaqua.nell2rdf.extract.metadata.util.ConstantList.PRA;
 import eu.wdaqua.nell2rdf.extract.metadata.util.Utility;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PRA extends Header {
 
-    private Map<String, Double> mapTriple;
+    private List<Rule> LRules;
 
     public PRA(String str, double Probability) {
         super(str, PRA, Probability);
     }
 
-    public Map<String, Double> getMapTriple() {
-        return mapTriple;
+    public List<Rule> getLRules() {
+        return LRules;
     }
 
     @Override
     public void processStringText(String str) {
-        this.componentName = "PRA";
-        String temp = Utility.getPRA(str);
-        String tempSplit[] = temp.split("\t");
 
-        mapTriple = new HashMap<>();
-        for (int i = 0; i < tempSplit.length;) {
-            mapTriple.put(tempSplit[0], Double.valueOf(tempSplit[1]));
-            i += 2;
+        LRules = new ArrayList<>();
+
+        this.componentName = "PRA";
+        String sEntireRules = Utility.getPRA(str);
+
+        Pattern pattern = Pattern.compile(Utility.REGEX_PRA_RULE);
+        Matcher matcher = pattern.matcher(sEntireRules);
+
+        while (matcher.find()) {
+            String sTemp = matcher.group();
+            String sPathDirection = sTemp.substring(0, 6);
+            String sPath = sTemp.substring(6).split("\t")[0];
+            double dScore = Double.valueOf(sTemp.substring(6).split("\t")[1]);
+
+            List<String> lTemp = new ArrayList<>();
+            String spTemp[] = sPath.split(",");
+            for (String sRule : lTemp) {
+                lTemp.add(sRule);
+            }
+            LRules.add(new Rule(sPathDirection, lTemp, dScore));
         }
     }
 
@@ -39,11 +56,11 @@ public class PRA extends Header {
     public String toString() {
         StringBuffer temp = new StringBuffer();
         temp.append(" {");
-        this.mapTriple.entrySet().forEach((entry) -> {
-            String key = entry.getKey();
-            String value = String.valueOf(entry.getValue());
-            temp.append('\t').append(key).append('\t').append(value);
-        });
+        for (Rule LRule : this.LRules) {
+            temp.append(LRule.sPathDirection).append(" ").
+                    append(LRule.lPath.toArray()).append(" ").
+                    append(LRule.dScore).append("\t");
+        }
         temp.append("}");
 
         return super.toString() + temp.toString() + "]";
@@ -53,27 +70,27 @@ public class PRA extends Header {
     public String getStringSource() {
         StringBuffer temp = new StringBuffer();
         temp.append(" {");
-        this.mapTriple.entrySet().forEach((entry) -> {
-            String key = entry.getKey();
-            String value = String.valueOf(entry.getValue());
-            temp.append('\t').append(key).append('\t').append(value);
-        });
+
+        for (Rule LRule : this.LRules) {
+            temp.append(LRule.sPathDirection).append(" ").
+                    append(LRule.lPath.toArray()).append(" ").
+                    append(LRule.dScore).append("\t");
+        }
+
         temp.append("}");
         return temp.toString();
     }
 
     private class Rule {
 
-        String sNamedEntity;
-        String sRelation;
-        Double dValue;
-        String sReferency;
+        String sPathDirection;
+        List<String> lPath;
+        double dScore;
 
-        public Rule(String sNamedEntity, String sRelation, Double dValue, String sReferency) {
-            this.sNamedEntity = sNamedEntity;
-            this.sRelation = sRelation;
-            this.dValue = dValue;
-            this.sReferency = sReferency;
+        public Rule(String sPathDirection, List<String> lPath, double dScore) {
+            this.sPathDirection = sPathDirection;
+            this.lPath = lPath;
+            this.dScore = dScore;
         }
     }
 

@@ -22,6 +22,10 @@ public class LatLong extends Header {
     private String rules;
     private List<Rule> lrules;
 
+    public List<Rule> getMetadata_Lrules() {
+        return lrules;
+    }
+
     public LatLong(String str, String ComponentName, double Probability) {
         super(str, ComponentName, Probability);
     }

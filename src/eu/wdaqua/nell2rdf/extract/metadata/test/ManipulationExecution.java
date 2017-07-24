@@ -61,24 +61,22 @@ public class ManipulationExecution {
 
         StringBuffer temp = new StringBuffer();
 
-            while ((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             setFeatures(line);
             Map<String, Object> p = LI.getListComponents();
 
             temp.append("START: \t");
             p.entrySet().forEach((pair) -> {
+                int index = 0;
                 String key = pair.getKey();
                 System.out.println(((Header) pair.getValue()).getDateTime());
                 switch (key) {
                     case ConstantList.ONTOLOGYMODIFIER:
-                        temp.append(((OntologyModifier) pair.getValue()));
-                        //((CMC) pair.getValue()).g
-                        //FormatHeader FH = ((OntologyModifier) pair.getValue()).getFormatHeader().
-
+                        temp.append(((OntologyModifier) pair.getValue()).getMetadata_From());
                         break;
                     case ConstantList.CPL:
-                        temp.append(((CPL) pair.getValue()).toString());
-                        JSON_CPL jsonCPL = new JSON_CPL(pair.getValue());
+                        temp.append(((CPL) pair.getValue()).getMetadata_MapTPOccurence().toString());
+                        /*JSON_CPL jsonCPL = new JSON_CPL(pair.getValue());
                         jsonCPL.setJsonObject();
 
                          {
@@ -87,53 +85,70 @@ public class ManipulationExecution {
                             } catch (IOException ex) {
                                 System.out.println("Erro para escrever um anta duma linha" + ex);
                             }
-                        }
-                        break;
-                    case ConstantList.SEAL:
-                        temp.append(((SEAL) pair.getValue()).toString());
-                        break;
-                    case ConstantList.OE:
-                        temp.append(((OE) pair.getValue()).toString());
-                        break;
-                    case ConstantList.CMC:
-                        temp.append(((CMC) pair.getValue()).toString());
-                        break;
-                    case ConstantList.ALIASMATCHER:
-                        temp.append(((AliasMatcher) pair.getValue()).toString());
-                        /*  {
-                            JSON_AliasMatcher jsonAlias = new JSON_AliasMatcher(pair.getValue());
-                            try {
-                                Utility.writeJsonFile(jsonAlias.getJsonObject(), Main.fileOutToString + "teste", true);
-                            } catch (IOException ex) {
-                                Logger.getLogger(ManipulationExecution.class.getName()).log(Level.SEVERE, null, ex);
-                            }
                         }*/
                         break;
+                    case ConstantList.SEAL:
+                        temp.append(((SEAL) pair.getValue()).getMedatadata_URLList().toString());
+                        break;
+                    case ConstantList.OE:
+                        temp.append(((OE) pair.getValue()).getMetadata_mapTextURL().toString());
+                        break;
+                    case ConstantList.CMC:
+                        index = ((CMC) pair.getValue()).getMetadata_CmcList().size();
+                        while (index > 0) {
+                            index--;
+                            temp.append(((CMC) pair.getValue()).getMetaData_CMCObjectFieldName(index))
+                                    .append("\t").append(((CMC) pair.getValue()).getMetaData_CMCObjectFieldValue(index))
+                                    .append("\t").append(((CMC) pair.getValue()).getMetaData_CMCObjectScore(index));
+                        }
+                        break;
+                    case ConstantList.ALIASMATCHER:
+                        temp.append(((AliasMatcher) pair.getValue()).getMetadata_FreebaseDate());
+                        break;
                     case ConstantList.MBL:
-                        temp.append(((MBL) pair.getValue()).toString());
+                        temp.append(((MBL) pair.getValue()).getMetadata_PromotionOfConcept());
                         break;
                     case ConstantList.PRA:
-                        temp.append(((PRA) pair.getValue()).toString());
+                        // temp.append(((PRA) pair.getValue()).);
                         break;
                     case ConstantList.RULEINFERENCE:
-                        temp.append(((RuleInference) pair.getValue()).toString());
+                        temp.append(((RuleInference) pair.getValue()).getMetaData_dAccuracy())
+                                .append("\t").append(((RuleInference) pair.getValue()).getMetaData_dAccuracy())
+                                .append("\t").append(((RuleInference) pair.getValue()).getMetaData_iNrCorrectionEstimation())
+                                .append("\t").append(((RuleInference) pair.getValue()).getMetaData_iNrIncorrectEstimation())
+                                .append("\t").append(((RuleInference) pair.getValue()).getMetaData_iNrTrainingAssertation())
+                                .append("\t").append(((RuleInference) pair.getValue()).getMetaData_lRefRule().toString())
+                                .append("\t").append(((RuleInference) pair.getValue()).getMetaData_lValuesRule().toString());
+
                         break;
                     case ConstantList.KBMANIPULATION:
-                        temp.append(((KbManipulation) pair.getValue()).toString());
+                        temp.append(((KbManipulation) pair.getValue()).getMetadata_oldBug());
                         break;
                     case ConstantList.SEMPARSE:
-                        temp.append(((Semparse) pair.getValue()).toString());
+                        temp.append(((Semparse) pair.getValue()).getMetadata_SentenceList().toString());
                         break;
                     case ConstantList.LE:
-                        temp.append(((LE) pair.getValue()).toString());
+                        temp.append(((LE) pair.getValue()).getMetadata_StringSource());
                         break;
                     case ConstantList.SPREADSHEETEDITS:
-                        temp.append(((SpreadsheetEdits) pair.getValue()).toString());
+                        temp.append(((SpreadsheetEdits) pair.getValue()).getMetadata_Action())
+                                .append(((SpreadsheetEdits) pair.getValue()).getMetadata_Entity())
+                                .append(((SpreadsheetEdits) pair.getValue()).getMetadata_From())
+                                .append(((SpreadsheetEdits) pair.getValue()).getMetadata_Relation())
+                                .append(((SpreadsheetEdits) pair.getValue()).getMetadata_UserFeedback())
+                                .append(((SpreadsheetEdits) pair.getValue()).getMetadata_Value());
                         break;
                     case ConstantList.LATLONG:
                     case ConstantList.LATLONGTT:
-                        temp.append(((LatLong) pair.getValue()).toString());
-                        System.out.println(Arrays.toString(((LatLong) pair.getValue()).getFormatHeader().getTokenElement2LatLong()));
+
+                        index = ((LatLong) pair.getValue()).getMetadata_Lrules().size();
+                        while (index > 0) {
+                            index--;
+                            temp.append(((LatLong) pair.getValue()).getMetadata_Phrase(index))
+                                    .append("\t").append(((LatLong) pair.getValue()).getMetadata_Phrase(index))
+                                    .append("\t").append(((LatLong) pair.getValue()).getMetadata_Value1(index))
+                                    .append("\t").append(((LatLong) pair.getValue()).getMetadata_Value2(index));
+                        }
                         break;
                     default:
                         throw new IllegalArgumentException("Invalid Component Name: " + key);
@@ -176,7 +191,7 @@ public class ManipulationExecution {
 
         JSONArray jsonArrayIntern = null;
 
-       temp.append("{\"line\":[");
+        temp.append("{\"line\":[");
 
         while ((line = reader.readLine()) != null) {
 
@@ -193,7 +208,7 @@ public class ManipulationExecution {
                 switch (key) {
                     case ConstantList.CPL:
                         //System.out.println(LineInstanceJOIN.completeLine);
-                        
+
                         JSON_CPL jsonCPL = new JSON_CPL(pair.getValue());
                         jsonCPL.setJsonObject();
                         jsonArrayIntern.add(jsonCPL.getJsonObjectMain());
@@ -202,21 +217,21 @@ public class ManipulationExecution {
                     // throw new IllegalArgumentException("Invalid Component Name: " + key);
                 }
             }
-            
+
             temp.append(jsonArrayIntern.toString()).append(",");
 
             if (temp.length() > 2) {
                 jsonArrayIntern = new JSONArray();
-            try {
-                Utility.writeStringBuffer(temp, Main.fileOutToString, true);
-            } catch (IOException ex) {
-                Logger.getLogger(LineInstanceJOIN.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            temp.delete(0, temp.length());
+                try {
+                    Utility.writeStringBuffer(temp, Main.fileOutToString, true);
+                } catch (IOException ex) {
+                    Logger.getLogger(LineInstanceJOIN.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                temp.delete(0, temp.length());
             }
         }
-       temp.append(jsonArrayIntern.toString()).append("]}");
-     
+        temp.append(jsonArrayIntern.toString()).append("]}");
+
         try {
             Utility.writeStringBuffer(temp, Main.fileOutToString, true);
         } catch (IOException ex) {

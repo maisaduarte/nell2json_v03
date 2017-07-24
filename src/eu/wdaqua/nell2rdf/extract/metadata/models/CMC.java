@@ -21,6 +21,10 @@ public class CMC extends Header {
     //List of CMC fields
     private List<CMCObjects> cmcList;
 
+    public List<CMCObjects> getMetadata_CmcList() {
+        return cmcList;
+    }
+
     public CMC(String str, double Probability) {
         super(str, CMC, Probability);
     }

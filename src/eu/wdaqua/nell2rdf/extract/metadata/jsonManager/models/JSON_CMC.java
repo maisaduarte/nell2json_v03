@@ -30,11 +30,11 @@ public class JSON_CMC extends JSON_Header {
         JSONObject jObjTemp2;
         JSONArray jArrayTemp1 = new JSONArray();
 
-        for (int i = 0; i < cmc.getMetadata().size(); i++) {
+        for (int i = 0; i < cmc.getMetadata_CmcList().size(); i++) {
             jObjTemp1 = new JSONObject();
             jObjTemp2 = new JSONObject();
-            jObjTemp1.put(cmc.getCMCObjetcField1(i), cmc.getCMCObjetcField2(i));
-            jObjTemp2.put(jObjTemp1, cmc.getCMCObjetcScore(i));
+            jObjTemp1.put(cmc.getMetaData_CMCObjectFieldName(i), cmc.getMetaData_CMCObjectFieldValue(i));
+            jObjTemp2.put(jObjTemp1, cmc.getMetaData_CMCObjectScore(i));
             jArrayTemp1.add(jObjTemp2);
         }
         this.jsonObjectMain.put(TYPE_METADATA, jArrayTemp1);
