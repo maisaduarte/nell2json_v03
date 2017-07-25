@@ -66,10 +66,22 @@ public class CMC extends Header {
         while (matcher.find()) {
             String temp = matcher.group();
             String tempDouble[] = temp.split("\t");
-            String tempString[] = tempDouble[0].split("=");
+            String tempString[] = new String[2];
+
+            if (temp.contains("=")) {
+                tempString = tempDouble[0].split("=");
+            } else {
+                tempString[0] = tempDouble[0];
+                tempString[1] = "";
+            }
+            // try {
             setCmcList(tempString[0].trim(), tempString[1].trim(), Double.valueOf(tempDouble[1].trim()));
+            //} catch (ArrayIndexOutOfBoundsException e) {
+            //     System.out.println(temp + "\t" + str + "\n" + Utility.REGEX_CMC_SOURCE_FLOAT);
+            // }
         }
 
+        /*
         pattern = Pattern.compile(Utility.REGEX_CMC_SOURCE_STRING);
         matcher = pattern.matcher(str);
 
@@ -81,8 +93,7 @@ public class CMC extends Header {
 
             //Add -0000001 as a fake float number
             setCmcList(tempString[0].trim(), tempString[1].trim());
-        }
-
+        }*/
     }
 
     @Override

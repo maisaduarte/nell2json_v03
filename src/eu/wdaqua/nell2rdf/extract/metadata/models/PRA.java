@@ -38,14 +38,23 @@ public class PRA extends Header {
         Matcher matcher = pattern.matcher(sEntireRules);
 
         while (matcher.find()) {
-            String sTemp = matcher.group();
-            String sPathDirection = sTemp.substring(0, 6);
-            String sPath = sTemp.substring(6).split("\t")[0];
-            double dScore = Double.valueOf(sTemp.substring(6).split("\t")[1]);
+            String sTemp = "";
+            String sPathDirection = "";
+            String sPath = "";
+            double dScore = 0;
+            try {
+                sTemp = matcher.group();
+                sPathDirection = sTemp.substring(0, sTemp.indexOf("concept:"));
+                sPath = sTemp.substring(6).split("\t")[0];
+                dScore = Double.valueOf(sTemp.substring(6).split("\t")[1]);
+            } catch (StringIndexOutOfBoundsException e) {
+                System.out.println("Aqui " + str + "\t" + sTemp);
+                System.out.println(LineInstanceJOIN.completeLine);
+            }
 
             List<String> lTemp = new ArrayList<>();
             String spTemp[] = sPath.split(",");
-            for (String sRule : lTemp) {
+            for (String sRule : spTemp) {
                 lTemp.add(sRule);
             }
             LRules.add(new Rule(sPathDirection, lTemp, dScore));

@@ -43,16 +43,16 @@ public class ManipulationExecution {
 
     private LineInstanceJOIN LI;
 
-    public void setFeatures(String line) {
+    public void setFeatures(String line, boolean theresCandidate) {
 
         String[] split = line.split("\t");
         LI = new LineInstanceJOIN(split[0], split[1], split[2], split[3], split[4],
                 Utility.DecodeURL(split[5]), split[6], split[7],
                 split[8], split[9], split[10],
-                split[11], Utility.DecodeURL(split[12]), line, true);
+                split[11], Utility.DecodeURL(split[12]), line, theresCandidate);
     }
 
-    public void readNELLcsv(String pathIN, String pathOUT) throws FileNotFoundException, IOException {
+    public void readNELLcsv(String pathIN) throws FileNotFoundException, IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(pathIN));
         String line = reader.readLine();
@@ -61,15 +61,20 @@ public class ManipulationExecution {
 
         StringBuffer temp = new StringBuffer();
 
+        boolean theresCandidate = false;
+
         while ((line = reader.readLine()) != null) {
-            setFeatures(line);
+
+            //System.out.println(line);
+            setFeatures(line, theresCandidate);
             Map<String, Object> p = LI.getListComponents();
 
             temp.append("START: \t");
             p.entrySet().forEach((pair) -> {
                 int index = 0;
                 String key = pair.getKey();
-                System.out.println(((Header) pair.getValue()).getDateTime());
+                temp.append("COMPONENT: ").append(key).append("\t");
+               // System.out.println(((Header) pair.getValue()).getDateTime());
                 switch (key) {
                     case ConstantList.ONTOLOGYMODIFIER:
                         temp.append(((OntologyModifier) pair.getValue()).getMetadata_From());
@@ -109,7 +114,10 @@ public class ManipulationExecution {
                         temp.append(((MBL) pair.getValue()).getMetadata_PromotionOfConcept());
                         break;
                     case ConstantList.PRA:
-                        // temp.append(((PRA) pair.getValue()).);
+                        while (index > 0) {
+                            index--;
+                            temp.append(((PRA) pair.getValue()).getLRules());
+                        }
                         break;
                     case ConstantList.RULEINFERENCE:
                         temp.append(((RuleInference) pair.getValue()).getMetaData_dAccuracy())
@@ -193,10 +201,12 @@ public class ManipulationExecution {
 
         temp.append("{\"line\":[");
 
+        boolean theresCandidate = false;
+
         while ((line = reader.readLine()) != null) {
 
             //System.out.println(line);
-            setFeatures(line);
+            setFeatures(line, theresCandidate);
             Map<String, Object> p = LI.getListComponents();
 
             jsonArrayIntern = new JSONArray();

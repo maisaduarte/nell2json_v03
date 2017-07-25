@@ -110,8 +110,8 @@ public class RuleInference extends Header {
                 subRule = new String[3];
 
                 subRule[0] = sTempSplit[0].trim();
-                subRule[2] = sTempSplit[1].trim();
-                subRule[3] = sTempSplit[2].trim();
+                subRule[1] = sTempSplit[1].trim();
+                subRule[2] = sTempSplit[2].trim();
 
                 lRule.add(subRule);
             }
@@ -154,7 +154,5 @@ public class RuleInference extends Header {
             lValuesRule.addAll(Arrays.asList(sTempSplit));
 
         }
-
     }
-
 }
