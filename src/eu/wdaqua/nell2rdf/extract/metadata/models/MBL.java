@@ -22,6 +22,7 @@ public class MBL extends Header {
 
     public MBL(String str, double Probability) {
         super(str, MBL, Probability);
+        System.out.println(LineInstanceJOIN.completeLine);
     }
 
     @Override

@@ -8,9 +8,7 @@ package eu.wdaqua.nell2rdf.extract.metadata.models;
 import static eu.wdaqua.nell2rdf.extract.metadata.util.ConstantList.PRA;
 import eu.wdaqua.nell2rdf.extract.metadata.util.Utility;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,9 +42,15 @@ public class PRA extends Header {
             double dScore = 0;
             try {
                 sTemp = matcher.group();
-                sPathDirection = sTemp.substring(0, sTemp.indexOf("concept:"));
-                sPath = sTemp.substring(6).split("\t")[0];
-                dScore = Double.valueOf(sTemp.substring(6).split("\t")[1]);
+                if (sTemp.contains("concept:")) {
+                    sPathDirection = sTemp.substring(0, sTemp.indexOf("concept:"));
+                    sPath = sTemp.substring(sTemp.indexOf("concept:"), sTemp.indexOf("\t"));
+                    dScore = Double.valueOf(sTemp.substring(sTemp.indexOf("concept:")).split("\t")[1]);
+                } else {
+                    sPathDirection = sTemp.substring(0, sTemp.indexOf("\t"));
+                    sPath = "";
+                    dScore = Double.valueOf(sTemp.substring(sTemp.indexOf("\t")));
+                }
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Aqui " + str + "\t" + sTemp);
                 System.out.println(LineInstanceJOIN.completeLine);
