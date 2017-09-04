@@ -110,7 +110,11 @@ public class ManipulationExecution {
                         temp.append(((AliasMatcher) pair.getValue()).getMetadata_FreebaseDate());
                         break;
                     case ConstantList.MBL:
-                        temp.append(((MBL) pair.getValue()).getMetadata_PromotionOfConcept());
+                        temp.append(((MBL) pair.getValue()).getMetadata_Entity()).append(",")
+                                .append(((MBL) pair.getValue()).getMetadata_EntityCategory()).append(",")
+                                 .append(((MBL) pair.getValue()).getMetadata_Relation()).append(",")
+                                 .append(((MBL) pair.getValue()).getMetadata_Value()).append(",")
+                                 .append(((MBL) pair.getValue()).getMetadata_ValueCategory());
                         break;
                     case ConstantList.PRA:
                         while (index > 0) {

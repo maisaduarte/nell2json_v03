@@ -14,12 +14,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.json.simple.JSONObject;
@@ -61,7 +60,7 @@ public class Utility {
     private static final String REGEX_RULE_INFERENCE_COMPLETE = "(?<=(\\{))(.*)(?=(\\}))";
     private static final String REGEX_PRA = "(?<=(>-))(.)*";
     public static final String REGEX_PRA_RULE = "(([a-zA-Z~,0:_\\-])+\\t([0-9\\.])+)";
-    
+
     private static final String REGEX_SEMPARSE = "(?<=(>-))(.)*";
     private static final String REGEX_ALIAS_MATCHER = "(?<=(\\[))(.)*(?=(\\]))";
     private static final String REGEX_ALIAS_MATCHER_FREEBASE = "(?<=(>-))(.)*";
@@ -191,18 +190,26 @@ public class Utility {
         return date;
     }
      */
-    public static Date setDateTimeFormatFreebase(String dateSTR) {
-        Date date = new Date();
+    public static LocalDate setDateTimeFormatFreebase(String dateSTR) {
+        /* Date date = new Date();
         TimeZone tz = TimeZone.getTimeZone("UTC");
         TimeZone.setDefault(tz);
+         */
         dateSTR = dateSTR.replace("Freebase ", "").trim();
 
         String dateTemp[] = dateSTR.replace("/", "-").split("-");
 
-        int day = Integer.valueOf(dateTemp[0]);
-        int month = Integer.valueOf(dateTemp[1]);
+        int month = Integer.valueOf(dateTemp[0]);
+        int day = Integer.valueOf(dateTemp[1]);
         int year = Integer.valueOf(dateTemp[2]);
 
+        LocalDate date = LocalDate.of(year, month, day);
+        // Store this long value
+        long noOfDays = date.toEpochDay(); // No of days from 1970-01-01
+        LocalDate newDate = LocalDate.ofEpochDay(noOfDays);
+        System.out.println(newDate); // 2016-05-04
+
+        /*
         GregorianCalendar gcalendar = new GregorianCalendar();
         //gcalendar.set(2017, (1 - 1), 01, 16, 30, 01);
         gcalendar.set(year, (month - 1), day);
@@ -215,7 +222,8 @@ public class Utility {
             //System.out.println("Problema com a formata�o de data " + dateSTR + " " + ex);
         }
         //System.out.println("UTC:     " + simpleDateFormat.format(gcalendar.getTime()));
-        return date;
+         */
+        return newDate;
     }
 
     public static String getComponentsHeader(String str) {

@@ -122,7 +122,7 @@ public final class LineInstanceJOIN {
         this.categoriesForEntity.addAll(Arrays.asList(organizeStringsExtraction(CategoriesForEntity).split(",")));
         this.categoriesForValue.addAll(Arrays.asList(organizeStringsExtraction(CategoriesForValue).split(",")));
 
-        this.completeLine = CompleteLine;
+        LineInstanceJOIN.completeLine = CompleteLine;
 
         this.candidateSource = CandidatSource;
 
