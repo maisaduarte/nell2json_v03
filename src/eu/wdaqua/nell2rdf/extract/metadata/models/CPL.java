@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class CPL extends Header {
 
-       private Map<String, Integer> mapMD;
+    private Map<String, Integer> mapMD;
     //Category or Relation?
     private String from;
 
@@ -90,5 +90,4 @@ public class CPL extends Header {
         }
     }
 
-    
 }

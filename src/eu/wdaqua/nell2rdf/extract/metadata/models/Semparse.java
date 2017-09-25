@@ -8,8 +8,6 @@ package eu.wdaqua.nell2rdf.extract.metadata.models;
 import static eu.wdaqua.nell2rdf.extract.metadata.util.ConstantList.SEMPARSE;
 import eu.wdaqua.nell2rdf.extract.metadata.util.Utility;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
