@@ -48,7 +48,7 @@ public final class LineInstanceJOIN {
     private List<String> categoriesForValue;
 
     private final String candidateSource;
-    private Map<String, Object> listComponents;
+    private Map<String, Header> listComponents;
 
     public void inicilizeObjets() {
         this.entityLiteralStrings = new ArrayList<>();
@@ -59,8 +59,7 @@ public final class LineInstanceJOIN {
         this.categoriesForValue = new ArrayList<>();
         this.nrIterations = new ArrayList<>();
         this.probability = new ArrayList<>();
-
-        listComponents = new HashMap<>();
+        this.listComponents = new HashMap<>();
     }
 
     public String organizeStringsExtraction(String str) {
@@ -79,7 +78,7 @@ public final class LineInstanceJOIN {
     public LineInstanceJOIN(String Entity, String Relation, String Value, String Iteration,
             String probabilityPROMOTION, String Source, String EntityLiteralStrings,
             String ValueLiteralStrings, String BestEntityLiteralString, String BestValueLiteralString,
-            String CategoriesForEntity, String CategoriesForValue, String CandidatSource, String CompleteLine, boolean candidate) {
+            String CategoriesForEntity, String CategoriesForValue, String CandidatSource, String CompleteLine) {
 
         this.inicilizeObjets();
 
@@ -106,6 +105,8 @@ public final class LineInstanceJOIN {
             }
             this.MBL_source = new MBL_OR_ERC(Source, tempMBLorERC);
         }
+        
+        IsCandidate(probabilityPROMOTION);
 
         if (candidate) {
             this.setProbability(probabilityPROMOTION);
@@ -130,7 +131,7 @@ public final class LineInstanceJOIN {
 
     }
 
-    public Map<String, Object> getListComponents() {
+    public Map<String, Header> getListComponents() {
         return listComponents;
     }
 
@@ -259,6 +260,8 @@ public final class LineInstanceJOIN {
             }
         }
     }
+
+
     
      public JSONObject setColumnsJSON() {
         JSONObject joColumns = new JSONObject();

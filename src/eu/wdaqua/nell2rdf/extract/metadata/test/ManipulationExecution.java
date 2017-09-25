@@ -42,13 +42,13 @@ public class ManipulationExecution {
 
     private LineInstanceJOIN LI;
 
-    public void setFeatures(String line, boolean theresCandidate) {
+    public void setFeatures(String line) {
 
         String[] split = line.split("\t");
         LI = new LineInstanceJOIN(split[0], split[1], split[2], split[3], split[4],
                 Utility.DecodeURL(split[5]), split[6], split[7],
                 split[8], split[9], split[10],
-                split[11], Utility.DecodeURL(split[12]), line, theresCandidate);
+                split[11], Utility.DecodeURL(split[12]), line);
     }
 
     public void readNELLcsv(String pathIN) throws FileNotFoundException, IOException {
@@ -60,20 +60,18 @@ public class ManipulationExecution {
 
         StringBuffer temp = new StringBuffer();
 
-        boolean theresCandidate = false;
-
         while ((line = reader.readLine()) != null) {
 
             //System.out.println(line);
-            setFeatures(line, theresCandidate);
-            Map<String, Object> p = LI.getListComponents();
+            setFeatures(line);
+            Map<String, Header> p = LI.getListComponents();
 
             temp.append("START: \t");
             p.entrySet().forEach((pair) -> {
                 int index = 0;
                 String key = pair.getKey();
                 temp.append("COMPONENT: ").append(key).append("\t");
-               // System.out.println(((Header) pair.getValue()).getDateTime());
+                // System.out.println(((Header) pair.getValue()).getDateTime());
                 switch (key) {
                     case ConstantList.ONTOLOGYMODIFIER:
                         temp.append(((OntologyModifier) pair.getValue()).getMetadata_From());
@@ -112,9 +110,9 @@ public class ManipulationExecution {
                     case ConstantList.MBL:
                         temp.append(((MBL) pair.getValue()).getMetadata_Entity()).append(",")
                                 .append(((MBL) pair.getValue()).getMetadata_EntityCategory()).append(",")
-                                 .append(((MBL) pair.getValue()).getMetadata_Relation()).append(",")
-                                 .append(((MBL) pair.getValue()).getMetadata_Value()).append(",")
-                                 .append(((MBL) pair.getValue()).getMetadata_ValueCategory());
+                                .append(((MBL) pair.getValue()).getMetadata_Relation()).append(",")
+                                .append(((MBL) pair.getValue()).getMetadata_Value()).append(",")
+                                .append(((MBL) pair.getValue()).getMetadata_ValueCategory());
                         break;
                     case ConstantList.PRA:
                         while (index > 0) {
@@ -190,7 +188,7 @@ public class ManipulationExecution {
         System.out.println("Finalizado");
 
     }
-
+    /*
     public void readNELLcsvTESTE(String pathIN, String pathOUT) throws FileNotFoundException, IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(pathIN));
@@ -255,4 +253,5 @@ public class ManipulationExecution {
         System.out.println("Finalizado");
 
     }
+     */
 }
