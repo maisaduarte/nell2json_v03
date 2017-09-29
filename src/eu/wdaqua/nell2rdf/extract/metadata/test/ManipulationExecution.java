@@ -5,7 +5,6 @@
  */
 package eu.wdaqua.nell2rdf.extract.metadata.test;
 
-import eu.wdaqua.nell2rdf.extract.metadata.jsonManager.models.JSON_CPL;
 import eu.wdaqua.nell2rdf.extract.metadata.models.AliasMatcher;
 import eu.wdaqua.nell2rdf.extract.metadata.models.CMC;
 import eu.wdaqua.nell2rdf.extract.metadata.models.CPL;
@@ -32,7 +31,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONArray;
 
 /**
  *
@@ -72,6 +70,7 @@ public class ManipulationExecution {
                 String key = pair.getKey();
                 temp.append("COMPONENT: ").append(key).append("\t");
                 // System.out.println(((Header) pair.getValue()).getDateTime());
+             //   System.out.println(key);
                 switch (key) {
                     case ConstantList.ONTOLOGYMODIFIER:
                         temp.append(((OntologyModifier) pair.getValue()).getMetadata_From());

@@ -207,7 +207,7 @@ public class Utility {
         // Store this long value
         long noOfDays = date.toEpochDay(); // No of days from 1970-01-01
         LocalDate newDate = LocalDate.ofEpochDay(noOfDays);
-        System.out.println(newDate); // 2016-05-04
+        //System.out.println(newDate); // 2016-05-04
 
         /*
         GregorianCalendar gcalendar = new GregorianCalendar();
