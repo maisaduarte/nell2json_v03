@@ -16,7 +16,7 @@ public class PRA extends Header {
 
     private List<Rule> LRules;
 
-    public PRA(String str, double Probability) {
+    public PRA(String str, Double Probability) {
         super(str, PRA, Probability);
     }
 

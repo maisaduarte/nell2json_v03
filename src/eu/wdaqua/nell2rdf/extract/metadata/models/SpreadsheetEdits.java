@@ -21,7 +21,7 @@ public class SpreadsheetEdits extends Header {
     private String action;
     private String fromIteration;
 
-    public SpreadsheetEdits(String str, double Probability) {
+    public SpreadsheetEdits(String str, Double Probability) {
         super(str, SPREADSHEETEDITS, Probability);
     }
 

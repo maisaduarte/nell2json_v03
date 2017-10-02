@@ -25,7 +25,7 @@ public class CMC extends Header {
         return cmcList;
     }
 
-    public CMC(String str, double Probability) {
+    public CMC(String str, Double Probability) {
         super(str, CMC, Probability);
     }
 

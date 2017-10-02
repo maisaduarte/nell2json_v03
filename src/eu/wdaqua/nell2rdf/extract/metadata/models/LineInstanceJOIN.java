@@ -12,8 +12,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  *
@@ -33,7 +31,7 @@ public final class LineInstanceJOIN {
     private List<Double> probability;
 
     private int nrIterationsInt;
-    private double probabilityDouble;
+    private Double probabilityDouble;
 
     //Object Responsable for the Source Column
     private final String source;
@@ -105,7 +103,7 @@ public final class LineInstanceJOIN {
             }
             this.MBL_source = new MBL_OR_ERC(Source, tempMBLorERC);
         }
-        
+
         IsCandidate(probabilityPROMOTION);
 
         if (candidate) {
@@ -197,13 +195,11 @@ public final class LineInstanceJOIN {
     //Macarronada Italiana
     //Here is where the componentes are created; [ aqui
     public void setListComponents(List<String> stringListComponents, List<Double> probList) {
-        double tempProbility = 0;
+        Double tempProbility = null;
 
         for (int i = 0; i < stringListComponents.size(); i++) {
 
-            if (probList == null) {
-                tempProbility = 0.0;
-            } else {
+            if (probList != null) {
                 try {
                     tempProbility = probList.get(i);
                 } catch (IndexOutOfBoundsException e) {
@@ -259,41 +255,5 @@ public final class LineInstanceJOIN {
                 this.listComponents.put(ConstantList.LATLONGTT, new LatLong(line, ConstantList.LATLONGTT, tempProbility));
             }
         }
-    }
-
-
-    
-     public JSONObject setColumnsJSON() {
-        JSONObject joColumns = new JSONObject();
-        joColumns.put(ConstantList.ENTITY_CSV, this.entity);
-        joColumns.put(ConstantList.RELATION_CSV, this.relation);
-        joColumns.put(ConstantList.VALUE_CSV, this.value);
-        if (!candidate) {
-            joColumns.put(ConstantList.ITERATION_CSV, this.nrIterationsInt);
-            joColumns.put(ConstantList.PROBABILITY_CSV, this.probabilityDouble);
-        } else {
-            JSONArray jArrayTempIteration = new JSONArray();
-
-            for (int i = 0; i < this.nrIterations.size(); i++) {
-                jArrayTempIteration.add(this.nrIterations.get(i));
-            }
-            joColumns.put(ConstantList.ITERATION_CSV, jArrayTempIteration);
-
-            JSONArray jArrayTempProbabilty = new JSONArray();
-            for (int i = 0; i < this.probability.size(); i++) {
-                jArrayTempProbabilty.add(this.probability.get(i));
-            }
-            joColumns.put(ConstantList.PROBABILITY_CSV, jArrayTempProbabilty);
-        }
-
-        joColumns.put(ConstantList.SOURCE_CSV, this.source);
-        joColumns.put(ConstantList.ENTITY_LS_CSV, this.entityLiteralStrings);
-        joColumns.put(ConstantList.VALUE_LS_CSV, this.valueLiteralStrings);
-        joColumns.put(ConstantList.BEST_ENTITY_CSV, this.bestEntityLiteralString);
-        joColumns.put(ConstantList.BEST_VALUE_CVS, this.bestValueLiteralString);
-        joColumns.put(ConstantList.CATEGORIES_ENTITY_CSV, this.categoriesForEntity);
-        joColumns.put(ConstantList.CATEGORIES_VALUE_CSV, this.categoriesForValue);
-
-        return joColumns;
     }
 }

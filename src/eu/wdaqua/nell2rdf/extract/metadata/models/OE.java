@@ -21,7 +21,7 @@ public class OE extends Header {
 
     private Map<String, URL> mapTextURL;
 
-    public OE(String str, double Probability) {
+    public OE(String str, Double Probability) {
         super(str, OE, Probability);
     }
 

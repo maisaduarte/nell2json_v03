@@ -45,7 +45,7 @@ public class MBL extends Header {
         return promotionOfConcept;
     }
 
-    public MBL(String str, double Probability) {
+    public MBL(String str, Double Probability) {
         super(str, MBL, Probability);
     }
 

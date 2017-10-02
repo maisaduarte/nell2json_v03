@@ -21,7 +21,7 @@ public class Semparse extends Header {
         return sSentence;
     }
 
-    public Semparse(String str, double Probability) {
+    public Semparse(String str, Double Probability) {
         super(str, SEMPARSE, Probability);
     }
 
