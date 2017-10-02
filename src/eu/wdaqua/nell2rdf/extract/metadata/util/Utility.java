@@ -68,7 +68,8 @@ public class Utility {
     public static final String REGEX_CML_SOURCE = "(\\_)(([a-zA-Z\\, ]+(\\t))[0-9]+)|(([a-zA-Z\\, ]+(\\_\\t))[0-9]+)";
     public static final String REGEX_CPL_SOURCE = "(arg[12] [a-zA-Z\\, ]+arg[12])\\t([0-9]+)";
     public static final String REGEX_SEAL_SOURCE = "(?<=(-using-KB))([^\\,])*";
-    public static final String REGEX_OE_SOURCE = "(?<=(>-))(.)*";
+    //public static final String REGEX_OE_SOURCE = "(?<=(>-))(.)*";
+    public static final String REGEX_OE_SOURCE = "(?<=(OE-Iter:[\\/0-9-:]{24}))(.)*";
     public static final String REGEX_CMC_SOURCE_FLOAT = "((([A-Z\\_=]+)([A-Za-z\\_])+)(\\t)([0-9.\\-])+)";
     public static final String REGEX_CMC_SOURCE_STRING = "(([A-Z=]+)([a-z])+)";
     public static final String REGEX_MBL = "(?<=(-<token=>-))(.)*";

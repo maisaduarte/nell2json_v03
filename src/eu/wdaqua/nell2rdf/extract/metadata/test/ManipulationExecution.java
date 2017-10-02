@@ -168,11 +168,11 @@ public class ManipulationExecution {
             );
             temp.append("END").append("\n");
             if (temp.length() > 10000000) {
-                try {
+               /* try {
                     Utility.writeStringBuffer(temp, Main.fileOutToString, true);
                 } catch (IOException ex) {
                     Logger.getLogger(LineInstanceJOIN.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
                 temp.delete(0, temp.length());
             }
         }
