@@ -54,8 +54,9 @@ public class Utility {
     private static final String REGEX_SOURCE_TOYS = "(\\[)(.)*";
     private static final String REGEX_SPREAD_SHEET_USER = "(?<=(>-))(.*)(?=(: ))";
     private static final String REGEX_SPREAD_SHEET_ERV = "(?<=(USER:))(.*)(?=(Action))";
-    private static final String REGEX_SPREAD_SHEET_ACTION = "(?<=(Action=\\())([a-zA-Z-0-9\\+\\-])*(?=(\\)))";
-    private static final String REGEX_SPREAD_SHEET_FROM = "(?<=(\\(from))(.*)(?=(\\)))";
+    private static final String REGEX_SPREAD_SHEET_USER_NULL = "(?<=(csv:))(.*)(?=(Action))";
+    private static final String REGEX_SPREAD_SHEET_ACTION = "(?<=(Action=\\())([a-zA-Z-0-9\\+\\- ])*(?=(\\)))";
+    private static final String REGEX_SPREAD_SHEET_FROM = "NELL(.*)csv";
 
     private static final String REGEX_RULE_INFERENCE_COMPLETE = "(?<=(\\{))(.*)(?=(\\}))";
     private static final String REGEX_PRA = "(?<=(>-))(.)*";
@@ -312,7 +313,12 @@ public class Utility {
     }
 
     public static String getSpreadSheetUserFeedback(String str) {
-        return extract(str, REGEX_SPREAD_SHEET_USER);
+        String temp = extract(str, REGEX_SPREAD_SHEET_USER);
+        if (!temp.contains("csv")) {
+            return temp;
+        } else {
+            return null;
+        }
     }
 
     public static String getSpreadSheetERV(String str, String user) {
@@ -320,8 +326,12 @@ public class Utility {
                 .replace(",", "").replace("\"", "").trim();
     }
 
+    public static String getSpreadSheetERV_NULL_USER(String str) {
+        return extract(str, REGEX_SPREAD_SHEET_USER_NULL).trim();
+    }
+
     public static String getSpreadSheetAction(String str) {
-        return extract(str, REGEX_SPREAD_SHEET_ACTION);
+        return extract(str, REGEX_SPREAD_SHEET_ACTION).replace(" -1", "");
     }
 
     public static String getSpreadSheetFrom(String str) {
